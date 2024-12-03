@@ -1,10 +1,11 @@
 use itertools::Itertools;
+use crate::aoc::ToI64;
 
 pub fn solve(data: String) {
     let (mut left, mut right): (Vec<_>, Vec<_>) =
         data.lines().map(|x| {
             let split = x.split_whitespace().collect_vec();
-            (split[0].parse::<i64>().unwrap(), split[1].parse::<i64>().unwrap())
+            (split[0].toi64(), split[1].toi64())
         }).unzip();
     left.sort_unstable();
     right.sort_unstable();
@@ -14,7 +15,7 @@ pub fn solve(data: String) {
 
     let counts_map = right.iter().counts();
     let similarity: i64 = left.iter()
-        .map(|x| i64::try_from(*counts_map.get(x).unwrap_or(&0)).unwrap() * x)
+        .map(|x| counts_map.get(x).unwrap_or(&0).toi64() * x)
         .sum();
     println!("Part 2 result: {similarity}");
 }

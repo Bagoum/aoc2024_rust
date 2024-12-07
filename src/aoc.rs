@@ -18,3 +18,19 @@ impl ToI64 for usize {
         i64::try_from(*self).unwrap()
     }
 }
+
+pub trait Vec2<T> {
+    fn index(&self, x: i64, y: i64) -> Option<&T>;
+    fn indexp(&self, (x,y): (i64, i64)) -> Option<&T> {
+        self.index(x, y)
+    }
+}
+
+impl<T> Vec2<T> for Vec<Vec<T>> {
+    fn index(&self, x: i64, y: i64) -> Option<&T> {
+        match self.get(y as usize) {
+            None => None,
+            Some(row) => row.get(x as usize)
+        }
+    }
+}

@@ -7,8 +7,8 @@ pub fn solve(data: String) {
         let total = nums.next().unwrap();
         (total[..(total.len()-1)].toi64(), nums.map(|x|x.toi64()).collect_vec())
     }).collect_vec();
-    let successful_sum = |concat| equations.iter().map(|(total, nums)|
-        if can_total(*total, &nums, concat) { total } else { &0 }).sum::<i64>();
+    let successful_sum = |concat| equations.iter().filter_map(|(total, nums)|
+        can_total(*total, &nums, concat).then_some(total)).sum::<i64>();
     println!("Part 1 solution: {}", successful_sum(false));
     println!("Part 2 solution: {}", successful_sum(true));
 }

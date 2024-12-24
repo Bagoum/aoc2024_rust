@@ -9,9 +9,9 @@ pub fn solve(data: String) {
             height_map.entry(c as i32 - '0' as i32).or_insert(HashSet::new()).insert((col as i64, row as i64));
         }
     }
-
-    let reachable_nines = height_map.iter().flat_map(|(h, xs)| xs.iter().map(|x| (x, RefCell::new(
-            if h == &9 { vec![x] } else { vec![] } ))).collect_vec()).collect::<HashMap<_,_>>();
+    let reachable_nines = height_map.iter().flat_map(|(h, xs)| xs.iter().map(|x|
+            (x, RefCell::new(if h == &9 { vec![x] } else { vec![] } )))
+        .collect_vec()).collect::<HashMap<_,_>>();
     let deltas = [(0i64,1i64),(1,0),(0,-1),(-1,0)];
     for height in (1..=9).rev() {
         for (x,y) in height_map[&height].iter() {

@@ -23,11 +23,12 @@ mod d21;
 mod d22;
 mod d23;
 mod d24;
+mod d25;
 
 use std::fs;
 
 fn main() {
-    solve_day(24);
+    solve_day(25);
 }
 
 //inputs are stored in root directory as dataXX.txt
@@ -58,6 +59,7 @@ fn solve_day(day: i32) {
         22 => d22::solve(data),
         23 => d23::solve(data),
         24 => d24::solve(data),
+        25 => d25::solve(data),
         _ => {}
     }
 }
